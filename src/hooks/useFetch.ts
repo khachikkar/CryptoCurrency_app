@@ -34,7 +34,7 @@ const fetchdata = useCallback(async()=>{
 
     useEffect(() => {
         fetchdata()
-    }, [fetchdata, header, body, method]);
+    }, [fetchdata]);
 
 return {
     data, loading, error
