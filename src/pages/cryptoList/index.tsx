@@ -2,8 +2,12 @@ import React  from 'react'
 import {useFetch} from "../../hooks/useFetch";
 import {requestUrls} from "../../util/constants/requestURLS";
 import {Table} from "antd"
+
+import {useNavigate} from "react-router-dom";
+
 import type {TableProps} from 'antd';
-import {CurrencyResponseModel} from "../../ts/types/CurrencyResponseModel";
+import {CurrencyListResponseModel} from "../../ts/types/CurrencyListResponseModel";
+import {ROUTES} from "../../util/constants/routes";
 
 
 
@@ -11,13 +15,16 @@ const CryptoList = () => {
 
 
 
-const { data, loading, error}  = useFetch<CurrencyResponseModel[]>({
-    url: `${requestUrls.coinsMarkets}?vs_currency=usd`
+const { data, loading, error}  = useFetch<CurrencyListResponseModel[]>({
+    url: `${requestUrls.coinsMarkets}/coins/markets?vs_currency=usd&per_page=5`,
+    header :{
+        'x-cg-demo-api-key' : process.env.REACT_APP_CRYPTO_API_KEY,
+    }
 })
 
     console.log(data)
 
-const columns: TableProps<CurrencyResponseModel>['columns'] = [
+const columns: TableProps<CurrencyListResponseModel>['columns'] = [
     {
         title: '#ID',
         dataIndex: 'id',
@@ -55,8 +62,11 @@ const columns: TableProps<CurrencyResponseModel>['columns'] = [
     },
 ]
 
-    const handleNavigateDetailPage = (row : CurrencyResponseModel) =>{
+    const navigate = useNavigate()
+
+    const handleNavigateDetailPage = (row : CurrencyListResponseModel) =>{
     console.log(row, "hello")
+        navigate(`${ROUTES.CRYPTO_DETAIL}/${row.id}`)
     }
 
 
