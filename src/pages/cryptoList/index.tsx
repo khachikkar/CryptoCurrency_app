@@ -17,7 +17,7 @@ const CryptoList = () => {
 const [page, setPage] = useState<number>(1);
 const [perPage, setPerPage] = useState<number>(10);
 
-const { data, loading, error}  = useFetch<CurrencyListResponseModel[]>({
+const { data, loading }  = useFetch<CurrencyListResponseModel[]>({
     url: `${requestUrls.coinsMarkets}/coins/markets?vs_currency=usd&per_page=${perPage}&page=${page}`,
     header :{
         'x-cg-demo-api-key' : process.env.REACT_APP_CRYPTO_API_KEY,

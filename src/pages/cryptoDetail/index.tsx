@@ -18,7 +18,7 @@ const CryptoDetail = () =>{
  console.log(id)
 
 
-    const { data, loading, error}  = useFetch<CurrencyDetailResponseModel>({
+    const { data }  = useFetch<CurrencyDetailResponseModel>({
         url: `${requestUrls.coinsMarkets}/coins/${id}`,
         header :{
             'x-cg-demo-api-key' : process.env.REACT_APP_CRYPTO_API_KEY,
@@ -31,7 +31,7 @@ const CryptoDetail = () =>{
         <div>
             <h2>Hello {data?.name} </h2>
             <h4>{data?.symbol}</h4>
-            <img src={data?.image.thumb} />
+            <img alt="img" src={data?.image.thumb} />
             <div style={{height: "400px"}}>
                 {data ? (
                     <PriceChart mdata={data} />
