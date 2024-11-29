@@ -4,7 +4,8 @@ import {useFetch} from "../../hooks/useFetch";
 import {requestUrls} from "../../util/constants/requestURLS";
 import {CurrencyDetailResponseModel} from "../../ts/types/CurrencyDetailResponseModel";
 
-import {Card} from "antd"
+import {Spin} from "antd"
+import PriceChart from "../../components/common/PriceChart";
 
 
 
@@ -24,12 +25,20 @@ const CryptoDetail = () =>{
         }
     })
 
-    console.log(data?.name)
+
+
     return (
         <div>
             <h2>Hello {data?.name} </h2>
             <h4>{data?.symbol}</h4>
             <img src={data?.image.thumb} />
+            <div style={{height: "400px"}}>
+                {data ? (
+                    <PriceChart mdata={data} />
+                ) : (
+                   <Spin></Spin>
+                )}
+            </div>
         </div>
     )
 }

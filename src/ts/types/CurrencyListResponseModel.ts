@@ -3,5 +3,7 @@ export type CurrencyListResponseModel = {
     image: string,
     current_price: number,
     price_change_24h : number,
-    name: string
+    name: string,
+
 }
+
