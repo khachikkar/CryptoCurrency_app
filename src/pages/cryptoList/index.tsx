@@ -18,6 +18,7 @@ const CryptoList = () => {
 
 
 
+
 const {getQueryParams, setQueryParams} = useQueryParams() //stacanq ejy
 
 const page = getQueryParams("page")    || DEFAULT_PAGINATION.page  //drinq ejy ev default ov 1 in ejy
@@ -107,9 +108,11 @@ const columns: TableProps<CurrencyListResponseModel>['columns'] = useMemo(()=>{
 
 
     return (
-        <div>
+        <div className="ListCont">
            <h2>Crypto List</h2>
+
             <Table
+                className="TableCont"
             columns={columns}
             dataSource={ data || []}
             loading={loading}
@@ -134,6 +137,7 @@ const columns: TableProps<CurrencyListResponseModel>['columns'] = useMemo(()=>{
             }}
 
             />
+
         </div>
     )
 }

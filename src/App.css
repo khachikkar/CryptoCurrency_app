@@ -1,38 +1,48 @@
-.App {
-  text-align: center;
-}
+.ListCont{
+  background-color: black;
+  padding: 10px;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  h2{
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.TableCont {
+  background-color: #1f1f1f; /* Dark background */
+  color: white; /* White text */
+}
+
+.TableCont .ant-table-thead > tr > th {
+  background-color: black; /* Header background */
+  color: white; /* Header text */
+}
+
+.TableCont .ant-table-tbody > tr > td {
+  background-color: black; /* Row background */
+  color: white; /* Row text */
+}
+
+.TableCont .ant-table-row:hover  > td:hover  {
+  background-color: blue; /* Row background */
+  color: white; /* Row text */
+}
+
+.TableCont .ant-pagination-item  {
+  background-color: black;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.TableCont .ant-pagination-item a{
+
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-pagination-item-ellipsis{
+  color: white;
+}
+
+.TableCont .ant-select-selector{
+  background-color: #333;
 }
