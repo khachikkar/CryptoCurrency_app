@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useFetch} from "../../hooks/useFetch";
 import {requestUrls} from "../../util/constants/requestURLS";
-import {Table} from "antd"
+import {Table, Select} from "antd"
 import {CaretUpOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 
@@ -10,7 +10,7 @@ import {CurrencyListResponseModel} from "../../ts/types/CurrencyListResponseMode
 import {ROUTES} from "../../util/constants/routes";
 import {useMemo} from "react";
 import {useQueryParams} from "../../hooks/useQueryParams";
-import {DEFAULT_PAGINATION} from "../../util/constants/pagination";
+import {CURRENCIES, DEFAULT_PAGINATION} from "../../util/constants/pagination";
 
 
 
@@ -23,12 +23,13 @@ const {getQueryParams, setQueryParams} = useQueryParams() //stacanq ejy
 
 const page = getQueryParams("page")    || DEFAULT_PAGINATION.page  //drinq ejy ev default ov 1 in ejy
 const pageSize = getQueryParams("pageSize")    || DEFAULT_PAGINATION.pageSize
+const currency = getQueryParams("currency") || "usd"
 
 
 console.log(getQueryParams("page"))
 
 const { data, loading }  = useFetch<CurrencyListResponseModel[]>({
-    url: `${requestUrls.coinsMarkets}/coins/markets?vs_currency=usd&per_page=${pageSize}&page=${page}`,
+    url: `${requestUrls.coinsMarkets}/coins/markets?vs_currency=${currency}&per_page=${pageSize}&page=${page}`,
     header :{
         'x-cg-demo-api-key' : process.env.REACT_APP_CRYPTO_API_KEY,
     }
@@ -89,11 +90,7 @@ const columns: TableProps<CurrencyListResponseModel>['columns'] = useMemo(()=>{
             title: 'Price',
             dataIndex: 'current_price',
             key: 'current_price',
-            render: (val)=>{
-                return(
-                    <span>${val}</span>
-                )
-            }
+
         },
 
     ]
@@ -106,11 +103,32 @@ const columns: TableProps<CurrencyListResponseModel>['columns'] = useMemo(()=>{
         navigate(`${ROUTES.CRYPTO_DETAIL}/${row.id}`)
     }
 
+    const onChange = (value: string) => {
+        console.log(`selected ${value}`);
+        setQueryParams({currency: value})
+    };
 
     return (
         <div className="ListCont">
-           <h2>Crypto List</h2>
+           <h2>Crypto List in {currency} </h2>
 
+            <Select
+                style={{width:"100px"}}
+                placeholder="Currency"
+                onChange={onChange}
+                // {
+                //     value: 'usd',
+                //     label: 'usd',
+                // },
+                options={
+                    CURRENCIES.map(currency=>{
+                        return {
+                            value: currency,
+                            label: currency
+                        }
+                    })
+                }
+            />
             <Table
                 className="TableCont"
             columns={columns}

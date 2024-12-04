@@ -1,0 +1,6 @@
+1. add a query currency
+
+2. start Spender app with typescript
+
+
+3. if ok , implement product add in restart Service
